@@ -1,7 +1,7 @@
-
 const {ipcRenderer} = require('electron')
 
 var form = document.getElementById('form')
+
 form.addEventListener('submit', submit)
 
 form.addEventListener('keyup', function (event) {
@@ -13,5 +13,18 @@ form.addEventListener('keyup', function (event) {
 
 function submit (event) {
   ipcRenderer.send('hide-window')
-  form.submit()
+
+  var data = {
+    text: 'hello world',
+    submitted_at: new Date()
+  }
+
+  sendRequest(data)
+}
+
+function sendRequest (data) {
+  var request = new XMLHttpRequest()
+  request.open('POST', 'http://localhost:55274/', true)
+  request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+  request.send(JSON.stringify(data))
 }
