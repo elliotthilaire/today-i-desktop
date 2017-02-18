@@ -2,20 +2,25 @@ const {ipcRenderer} = require('electron')
 
 var form = document.getElementById('form')
 
-form.addEventListener('submit', submit)
+form.addEventListener('submit', function (event){
+  var text = document.getElementById('textInput').value
+  submit(text)
+})
 
 form.addEventListener('keyup', function (event) {
   if (event.keyCode === 13 && !event.shiftKey) {
     event.preventDefault()
-    submit()
+    var text = document.getElementById('textInput').value
+    submit(text)
+    form.reset()
   }
 })
 
-function submit (event) {
+function submit (text) {
   ipcRenderer.send('hide-window')
 
   var data = {
-    text: 'hello world',
+    text: text,
     submitted_at: new Date()
   }
 
@@ -24,7 +29,17 @@ function submit (event) {
 
 function sendRequest (data) {
   var request = new XMLHttpRequest()
-  request.open('POST', 'http://localhost:55274/', true)
+  request.onreadystatechange = function () {
+    if (this.readyState === 4) {
+      if (this.status === 200) {
+        alert('sent')
+      } else {
+        alert('nope')
+      }
+    }
+  }
+
+  request.open('POST', 'http://localhost:57826/', true)
   request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
   request.send(JSON.stringify(data))
 }
