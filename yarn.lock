@@ -32,10 +32,6 @@ core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
-cron-parser@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/cron-parser/-/cron-parser-1.1.0.tgz#075b84c459c155e8c482ab4d56aff99dae58352e"
-
 electron-positioner@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/electron-positioner/-/electron-positioner-3.0.0.tgz#1a3b75c9cc1e29dd37c663b23fd876d4ffab9996"
@@ -119,10 +115,6 @@ localforage@^1.3.0:
   dependencies:
     lie "3.0.2"
 
-long-timeout@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/long-timeout/-/long-timeout-0.0.2.tgz#f36449ba89629d13a7a2b2523a4db9dd66e3ff68"
-
 menubar@^5.2.3:
   version "5.2.3"
   resolved "https://registry.yarnpkg.com/menubar/-/menubar-5.2.3.tgz#8f2761597b4a0ee87edf04a87d8aab1aac2c44e9"
@@ -150,12 +142,9 @@ nedb@^1.8.0:
     mkdirp "~0.5.1"
     underscore "~1.4.4"
 
-node-schedule@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/node-schedule/-/node-schedule-1.2.0.tgz#f03d4ebe71b0573e1708ddae0aa45d1658450cf1"
-  dependencies:
-    cron-parser "1.1.0"
-    long-timeout "0.0.2"
+node-cron@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/node-cron/-/node-cron-1.1.3.tgz#f161c743812302d50f5251bd93ca57019a5298d2"
 
 object-keys@^1.0.6:
   version "1.0.11"
