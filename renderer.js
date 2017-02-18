@@ -30,16 +30,18 @@ function submit (text) {
 function sendRequest (data) {
   var request = new XMLHttpRequest()
   request.onreadystatechange = function () {
+    ipcRenderer.send('persist-data', data)
+
     if (this.readyState === 4) {
       if (this.status === 200) {
-        alert('sent')
+        console.log('sent')
       } else {
-        alert('nope')
+        console.log('nope')
       }
     }
   }
 
-  request.open('POST', 'http://localhost:57826/', true)
+  request.open('POST', 'http://localhost:58393/', true)
   request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
   request.send(JSON.stringify(data))
 }
