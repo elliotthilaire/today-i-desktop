@@ -27,13 +27,13 @@ function submit (text) {
 function sendRequest (data) {
   var request = new XMLHttpRequest()
   request.onreadystatechange = function () {
-    ipcRenderer.send('persist-data', data)
 
     if (this.readyState === 4) {
       if (this.status === 200) {
         console.log('sent')
       } else {
         console.log('nope')
+        ipcRenderer.send('persist-data', data)
       }
     }
   }
