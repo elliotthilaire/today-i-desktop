@@ -1,16 +1,10 @@
 
 form {
   margin:0;
-  height: 100%;
 }
 
 textarea {
-  height:90%;
+  height:100%;
   width: 100%;
   font-size: 1.5rem;
-}
-
-.footer {
-  bottom: 0px;
-  position:fixed;
 }
