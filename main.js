@@ -24,3 +24,7 @@ ipcMain.on('hide-window', (event) => {
 ipcMain.on('persist-data', (event, data) => {
   persistance.insert(data)
 })
+
+mb.on('after-create-window', (event) => {
+  mb.window.webContents.openDevTools()
+})
