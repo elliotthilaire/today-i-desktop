@@ -26,10 +26,33 @@ mb.on('after-create-window', (event) => {
 })
 
 
-var task = require('./task.js')
 var cron = require('node-cron')
 
 cron.schedule('* * * * *', function () {
   console.log('running a task')
-  task.run()
+  runTasks()
 })
+
+//dfdf
+var request = require('request')
+function sendRequest (data) {
+  var options = {
+    url: 'http://localhost:3000',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+    body: JSON.stringify(data)
+  }
+  console.log('sending request')
+  request.post(options, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      console.log('sent request' + body)
+      persistance.remove(data)
+    }
+  })
+}
+
+
+function runTasks () {
+  persistance.list(sendRequest)
+}

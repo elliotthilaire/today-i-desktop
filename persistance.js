@@ -11,7 +11,24 @@ function insert (data) {
   })
 }
 
+function remove (data) {
+  console.log('might remove', data)
+  db.remove(data, {}, function (err, numRemoved) {
+    console.log('removed: ' + numRemoved)
+  })
+}
+
+function list (callback) {
+  db.find({}, function (err, docs) {
+    docs.forEach(function(element) {
+      console.log('sending request' + element)
+      callback(element)
+    })
+  })
+}
 
 module.exports = {
-  insert: insert
+  insert: insert,
+  remove: remove,
+  list: list
 }
