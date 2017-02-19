@@ -1,10 +1,8 @@
 const {ipcMain} = require('electron')
 const menubar = require('menubar')
 
-ipcMain.on('hide-window', (event) => {
-  event.returnValue = 'ok'
-  mb.hideWindow()
-})
+const persistance = require('./persistance.js')
+
 
 
 var mb = menubar({
@@ -19,16 +17,10 @@ mb.on('ready', function ready () {
 
 
 
-var Datastore = require('nedb')
-var db = new Datastore({ filename: 'tmp/db.txt' })
-
-db.loadDatabase(function (_err) {
-    // Start issuing commands after callback...
+ipcMain.on('hide-window', (event) => {
+  mb.hideWindow()
 })
 
 ipcMain.on('persist-data', (event, data) => {
-  db.insert(data, function (_err, doc) {
-    console.log('Inserted', doc.data, 'with ID', doc._id)
-  })
+  persistance.insert(data)
 })
-

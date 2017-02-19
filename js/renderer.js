@@ -1,5 +1,7 @@
 const {ipcRenderer} = require('electron')
 
+
+
 var form = document.getElementById('form')
 
 form.addEventListener('submit', function (event){
@@ -7,7 +9,7 @@ form.addEventListener('submit', function (event){
   submit(text)
 })
 
-form.addEventListener('keyup', function (event) {
+form.addEventListener('keydown', function (event) {
   if (event.keyCode === 13 && !event.shiftKey) {
     event.preventDefault()
     var text = document.getElementById('textInput').value
