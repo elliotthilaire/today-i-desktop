@@ -28,3 +28,9 @@ ipcMain.on('persist-data', (event, data) => {
 mb.on('after-create-window', (event) => {
   mb.window.webContents.openDevTools()
 })
+
+var cron = require('node-cron')
+
+cron.schedule('* * * * *', function () {
+  console.log('running a task')
+})
