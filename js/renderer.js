@@ -1,7 +1,5 @@
 const {ipcRenderer} = require('electron')
 
-
-
 var form = document.getElementById('form')
 
 form.addEventListener('keydown', function (event) {
@@ -14,7 +12,7 @@ form.addEventListener('keydown', function (event) {
 })
 
 function submit (text) {
-  ipcRenderer.send('hide-window')
+  // ipcRenderer.send('hide-window')
 
   var data = {
     text: text,
