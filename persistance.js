@@ -7,7 +7,7 @@ db.loadDatabase(function (_err) {
 
 function insert (data) {
   db.insert(data, function (_err, doc) {
-    console.log('Inserted', doc.data, 'with ID', doc._id)
+    console.log('Inserted', doc)
   })
 }
 

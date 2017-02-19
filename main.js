@@ -11,7 +11,6 @@ mb.on('ready', function ready () {
   console.log('app is ready')
   // your app code here
   mb.hideWindow()
-  task.run()
 })
 
 ipcMain.on('hide-window', (event) => {

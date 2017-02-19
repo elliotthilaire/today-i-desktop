@@ -1,28 +1,23 @@
-var http = require('http')
+var request = require('request')
 var Datastore = require('nedb')
 var db = new Datastore({ filename: 'tmp/db.txt' })
 
 function sendRequest (data) {
   var options = {
-    hostname: 'localhost',
-    port: 59835,
-    path: '/',
-    method: 'POST',
+    url: 'http://localhost:3000',
     headers: {
-      'Content-Type': 'application/json; charset=UTF-8',
-    }
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+    body: JSON.stringify(data)
   }
-
-  var req = http.request(options, (res) => {
-    console.log('res' + res)
+  console.log('sending request')
+  request.post(options, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      console.log('sent request' + body)
+      deleteEntry(data)
+    }
   })
-  req.on('error', (error) => {
-    console.log('could not send' + error)
-  })
-  var body = JSON.stringify(data)
-  req.end(body)
 }
-
 
 function deleteEntry (data) {
   db.remove(data, {}, function (err, numRemoved) {
@@ -36,9 +31,10 @@ db.loadDatabase(function (_err) {
 
 function run () {
   db.find({}, function (err, docs) {
+    console.log('found docs' + docs)
+    console.log(err)
     docs.forEach(function(element) {
-      console.log(element)
-
+      console.log('sending request' + element)
       sendRequest(element)
     })
   })

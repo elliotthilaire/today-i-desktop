@@ -25,6 +25,8 @@ function submit (text) {
 function sendRequest (data) {
   var request = new XMLHttpRequest()
   request.onreadystatechange = function () {
+    console.log(this.readyState)
+    console.log(this.status)
 
     if (this.readyState === 4) {
       if (this.status === 200) {
@@ -36,7 +38,7 @@ function sendRequest (data) {
     }
   }
 
-  request.open('POST', 'http://localhost:59835/', true)
+  request.open('POST', 'http://localhost:3000/', true)
   request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
   request.send(JSON.stringify(data))
 }
