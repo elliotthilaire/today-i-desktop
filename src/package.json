@@ -1,5 +1,5 @@
 {
-		"name": "electron-app",
+		"name": "today-i",
 		"version": "0.1.0",
 		"main": "main.js",
 		"dependencies": {

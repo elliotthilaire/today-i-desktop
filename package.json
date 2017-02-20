@@ -4,6 +4,7 @@
     "electron-packager": "^8.5.2"
   },
   "scripts": {
+    "dev": "electron src",
     "build": "electron-packager src --out dist",
     "clean": "rm -rf dist/*"
   }
