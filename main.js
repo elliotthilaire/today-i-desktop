@@ -7,10 +7,9 @@ var mb = menubar({
   height: 200
 })
 
-mb.on('ready', function ready () {
+mb.on('ready', function () {
   console.log('app is ready')
   // your app code here
-  mb.hideWindow()
 })
 
 ipcMain.on('hide-window', (event) => {
@@ -33,26 +32,15 @@ cron.schedule('* * * * *', function () {
   runTasks()
 })
 
-//dfdf
-var request = require('request')
-function sendRequest (data) {
-  var options = {
-    url: 'http://localhost:3000',
-    headers: {
-      'Content-Type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify(data)
-  }
-  console.log('sending request')
-  request.post(options, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      console.log('sent request' + body)
-      persistance.remove(data)
-    }
-  })
-}
+
+var task = require('./task.js')
+
+task.on('success', function (data) {
+  persistance.remove(data)
+})
+
 
 
 function runTasks () {
-  persistance.list(sendRequest)
+  persistance.list(task.run)
 }
