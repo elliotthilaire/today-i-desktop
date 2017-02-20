@@ -2,5 +2,9 @@
   "devDependencies": {
     "electron": "^1.4.15",
     "electron-packager": "^8.5.2"
+  },
+  "scripts": {
+    "build": "electron-packager src --out dist",
+    "clean": "rm -rf dist/*"
   }
 }
