@@ -10,7 +10,7 @@ app.on('ready', function () {
 })
 
 app.on('after-create-window', (event) => {
-  app.window.webContents.openDevTools()
+  // app.window.webContents.openDevTools()
 })
 
 ipcMain.on('hide-window', (event) => {
@@ -21,7 +21,6 @@ ipcMain.on('persist-data', (event, data) => {
   repo.insert(data)
 })
 
-
 var cron = require('node-cron')
 
 cron.schedule('* * * * *', function () {
@@ -29,12 +28,10 @@ cron.schedule('* * * * *', function () {
   runTasks()
 })
 
-
 var task = require('./task.js')
 task.on('success', function (data) {
   repo.remove(data)
 })
-
 
 function runTasks () {
   repo.each(task.run)
