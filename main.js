@@ -3,25 +3,22 @@ const menubar = require('menubar')
 
 const repo = require('./repo.js')
 
-var mb = menubar({
-  height: 200
+var app = menubar({height: 200})
+
+app.on('ready', function () {
+  console.log('app is ready')
 })
 
-mb.on('ready', function () {
-  console.log('app is ready')
-  // your app code here
+app.on('after-create-window', (event) => {
+  app.window.webContents.openDevTools()
 })
 
 ipcMain.on('hide-window', (event) => {
-  mb.hideWindow()
+  app.hideWindow()
 })
 
 ipcMain.on('persist-data', (event, data) => {
   repo.insert(data)
-})
-
-mb.on('after-create-window', (event) => {
-  mb.window.webContents.openDevTools()
 })
 
 
