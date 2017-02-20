@@ -18,10 +18,9 @@ function remove (data) {
   })
 }
 
-function list (callback) {
+function each (callback) {
   db.find({}, function (err, docs) {
     docs.forEach(function(element) {
-      console.log('sending request' + element)
       callback(element)
     })
   })
@@ -30,5 +29,5 @@ function list (callback) {
 module.exports = {
   insert: insert,
   remove: remove,
-  list: list
+  each: each
 }

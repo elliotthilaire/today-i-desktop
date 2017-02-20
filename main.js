@@ -42,5 +42,5 @@ task.on('success', function (data) {
 
 
 function runTasks () {
-  persistance.list(task.run)
+  persistance.each(task.run)
 }
