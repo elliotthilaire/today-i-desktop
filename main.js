@@ -1,7 +1,7 @@
 const {ipcMain} = require('electron')
 const menubar = require('menubar')
 
-const persistance = require('./persistance.js')
+const repo = require('./repo.js')
 
 var mb = menubar({
   height: 200
@@ -17,7 +17,7 @@ ipcMain.on('hide-window', (event) => {
 })
 
 ipcMain.on('persist-data', (event, data) => {
-  persistance.insert(data)
+  repo.insert(data)
 })
 
 mb.on('after-create-window', (event) => {
@@ -34,13 +34,11 @@ cron.schedule('* * * * *', function () {
 
 
 var task = require('./task.js')
-
 task.on('success', function (data) {
-  persistance.remove(data)
+  repo.remove(data)
 })
 
 
-
 function runTasks () {
-  persistance.each(task.run)
+  repo.each(task.run)
 }
