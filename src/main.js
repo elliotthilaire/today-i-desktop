@@ -1,9 +1,12 @@
 const {ipcMain} = require('electron')
 const menubar = require('menubar')
 
-const repo = require('./repo.js')
-
 var app = menubar({height: 200})
+
+var dbPath = app.app.getPath('home')
+var storageLocation = `${dbPath}/.today-i-db.js`
+
+const repo = require('./repo.js')(storageLocation)
 
 app.on('ready', function () {
   console.log('app is ready')
