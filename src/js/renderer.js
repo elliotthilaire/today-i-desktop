@@ -12,7 +12,6 @@ form.addEventListener('keydown', function (event) {
 })
 
 function submit (text) {
-
   var data = {
     text: text,
     submitted_at: new Date()
@@ -21,3 +20,8 @@ function submit (text) {
   ipcRenderer.send('hide-window')
   ipcRenderer.send('handle-data', data)
 }
+
+var quit = document.getElementById('quit')
+quit.addEventListener('click', function (event) {
+  ipcRenderer.send('quit')
+})

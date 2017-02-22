@@ -4,7 +4,11 @@ form {
 }
 
 textarea {
-  height:100%;
+  height:calc(100% - 30px);
   width: 100%;
   font-size: 1.5rem;
+}
+
+#quit {
+  float:right;
 }

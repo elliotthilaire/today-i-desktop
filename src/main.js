@@ -20,6 +20,10 @@ ipcMain.on('hide-window', (event) => {
   app.hideWindow()
 })
 
+ipcMain.on('quit', (event) => {
+  app.app.quit()
+})
+
 ipcMain.on('handle-data', (event, data) => {
   repo.insert(data)
   runTasks()
