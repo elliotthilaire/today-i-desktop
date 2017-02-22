@@ -20,8 +20,9 @@ ipcMain.on('hide-window', (event) => {
   app.hideWindow()
 })
 
-ipcMain.on('persist-data', (event, data) => {
+ipcMain.on('handle-data', (event, data) => {
   repo.insert(data)
+  runTasks()
 })
 
 var cron = require('node-cron')
