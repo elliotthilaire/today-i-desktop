@@ -6,6 +6,9 @@ var app = menubar({height: 200})
 var dbPath = app.app.getPath('home')
 var storageLocation = `${dbPath}/.today-i-db.js`
 
+var requestOptions = require(`${dbPath}/.today-i-config.js`)
+console.log(requestOptions)
+
 const repo = require('./repo.js')(storageLocation)
 
 app.on('ready', function () {
