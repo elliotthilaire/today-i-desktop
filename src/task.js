@@ -5,7 +5,7 @@ const emitter = new EventEmitter()
 var request = require('request')
 
 function sendRequest (data) {
-  var options = {
+  var defaultOptions = {
     method: 'POST',
     url: 'http://localhost:3000',
     headers: {
@@ -13,6 +13,17 @@ function sendRequest (data) {
     },
     body: JSON.stringify(data)
   }
+
+  var customOptions = {
+    method: 'GET',
+    url: 'http://localhost:4000',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8'
+    }
+  }
+
+  var options = Object.assign({}, defaultOptions, customOptions)
+
   console.log('sending request')
   request(options, function (error, response, body) {
     if (!error && response.statusCode === 200) {
