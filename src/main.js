@@ -6,18 +6,6 @@ var app = menubar({height: 200})
 var dbPath = app.app.getPath('home')
 var storageLocation = `${dbPath}/.today-i-db.js`
 
-var configFile = findConfigFile()
-function findConfigFile () {
-  if (process.env.TODAY_I_CONFIG) {
-    return process.env.TODAY_I_CONFIG
-  } else {
-    return `${dbPath}/.today-i-config.js`
-  }
-}
-
-console.log(configFile)
-var requestOptions = require(configFile)
-console.log(requestOptions)
 
 const repo = require('./repo.js')(storageLocation)
 
@@ -49,11 +37,26 @@ cron.schedule('* * * * *', function () {
   runTasks()
 })
 
-var task = require('./task.js')
-task.on('success', function (data) {
+
+//
+//
+
+var configFile = findConfigFile()
+function findConfigFile () {
+  if (process.env.TODAY_I_CONFIG) {
+    return process.env.TODAY_I_CONFIG
+  } else {
+    return `${dbPath}/.today-i-config.js`
+  }
+}
+var requestConfig = require(configFile).config
+
+var requestSender = require('./request_sender.js')(requestConfig)
+
+requestSender.on('success', function (data) {
   repo.remove(data)
 })
 
 function runTasks () {
-  repo.each(task.run)
+  repo.each(requestSender.run)
 }
