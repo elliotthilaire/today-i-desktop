@@ -21,7 +21,7 @@ module.exports = function (options) {
 
     console.log('sending request')
     request(options, function (error, response, body) {
-      if (!error && response.statusCode === 200) {
+      if (!error && response.statusCode === 201) {
         console.log('emit success')
         emitter.emit('success', data)
       } else {
