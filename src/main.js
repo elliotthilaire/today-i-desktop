@@ -4,20 +4,20 @@ const menubar = require('menubar')
 
 
 // initialize menubar
-var app = menubar({height: 200})
+var mb = menubar({height: 200})
 
-app.on('ready', function () {
+mb.on('ready', function () {
   console.log('app is ready')
 })
 
-app.on('after-create-window', (event) => {
-  // app.window.webContents.openDevTools()
+mb.on('after-create-window', (event) => {
+  // mb.window.webContents.openDevTools()
 })
 
 
 
 // setup repository
-var dbPath = app.app.getPath('home')
+var dbPath = mb.app.getPath('home')
 var storageLocation = `${dbPath}/.today-i-db.js`
 
 const repo = require('./repo.js')(storageLocation)
@@ -26,11 +26,11 @@ const repo = require('./repo.js')(storageLocation)
 
 // initialize ipc channels
 ipcMain.on('hide-window', (event) => {
-  app.hideWindow()
+  mb.hideWindow()
 })
 
 ipcMain.on('quit', (event) => {
-  app.app.quit()
+  mb.app.quit()
 })
 
 ipcMain.on('handle-data', (event, data) => {
