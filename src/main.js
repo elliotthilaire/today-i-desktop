@@ -2,10 +2,16 @@ const {ipcMain} = require('electron')
 const menubar = require('menubar')
 
 
-
 // initialize menubar
 var mb = menubar({height: 200})
 
+
+// read config
+const homePath = mb.app.getPath('home')
+const config = require('./config_reader.js')(homePath)
+
+
+// setup listeners
 mb.on('ready', function () {
   console.log('app is ready')
 })
@@ -15,14 +21,7 @@ mb.on('after-create-window', (event) => {
 })
 
 
-
-// setup repository
-var configPath = mb.app.getPath('home')
-var storageLocation = `${configPath}/.today-i-db.js`
-
-const repo = require('./repo.js')(storageLocation)
-
-
+const repo = require('./repo.js')(config.storageFile)
 
 // initialize ipc channels
 ipcMain.on('hide-window', (event) => {
@@ -52,19 +51,8 @@ function runTasks () {
 }
 
 
-
-// setup requestSender
-var configFile = findConfigFile()
-function findConfigFile () {
-  if (process.env.TODAY_I_CONFIG) {
-    return process.env.TODAY_I_CONFIG
-  } else {
-    return `${configPath}/.today-i-config.js`
-  }
-}
-var requestConfig = require(configFile).config
-
-var requestSender = require('./request_sender.js')(requestConfig)
+// setup request sender
+var requestSender = require('./request_sender.js')(config.requestConfig)
 
 requestSender.on('success', function (data) {
   repo.remove(data)
