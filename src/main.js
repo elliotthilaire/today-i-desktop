@@ -1,17 +1,21 @@
 const {ipcMain} = require('electron')
 const menubar = require('menubar')
 
-
 // initialize menubar
 var mb = menubar({height: 200})
-
 
 // read config
 const homePath = mb.app.getPath('home')
 const config = require('./config_reader.js')(homePath)
 
+// initialize repo
+const repo = require('./repo.js')(config.storageFile)
 
-// setup listeners
+// initialize request_sender
+var requestSender = require('./request_sender.js')(config.requestConfig)
+
+
+// setup mb listeners
 mb.on('ready', function () {
   console.log('app is ready')
 })
@@ -21,9 +25,7 @@ mb.on('after-create-window', (event) => {
 })
 
 
-const repo = require('./repo.js')(config.storageFile)
-
-// initialize ipc channels
+// ipc channel listeners
 ipcMain.on('hide-window', (event) => {
   mb.hideWindow()
 })
@@ -38,6 +40,12 @@ ipcMain.on('handle-data', (event, data) => {
 })
 
 
+// setup request sender
+requestSender.on('success', function (data) {
+  repo.remove(data)
+})
+
+
 // setup schedular
 var cron = require('node-cron')
 
@@ -49,11 +57,3 @@ cron.schedule('* * * * *', function () {
 function runTasks () {
   repo.each(requestSender.run)
 }
-
-
-// setup request sender
-var requestSender = require('./request_sender.js')(config.requestConfig)
-
-requestSender.on('success', function (data) {
-  repo.remove(data)
-})
