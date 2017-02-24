@@ -17,8 +17,8 @@ mb.on('after-create-window', (event) => {
 
 
 // setup repository
-var dbPath = mb.app.getPath('home')
-var storageLocation = `${dbPath}/.today-i-db.js`
+var configPath = mb.app.getPath('home')
+var storageLocation = `${configPath}/.today-i-db.js`
 
 const repo = require('./repo.js')(storageLocation)
 
@@ -59,7 +59,7 @@ function findConfigFile () {
   if (process.env.TODAY_I_CONFIG) {
     return process.env.TODAY_I_CONFIG
   } else {
-    return `${dbPath}/.today-i-config.js`
+    return `${configPath}/.today-i-config.js`
   }
 }
 var requestConfig = require(configFile).config
