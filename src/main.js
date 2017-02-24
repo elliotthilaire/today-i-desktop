@@ -49,7 +49,7 @@ requestSender.on('success', function (data) {
 // setup schedular
 var cron = require('node-cron')
 
-cron.schedule('* * * * *', function () {
+cron.schedule('0 * * * *', function () {
   console.log('running a task')
   runTasks()
 })
