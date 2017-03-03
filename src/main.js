@@ -20,10 +20,6 @@ mb.on('ready', function () {
   console.log('app is ready')
 })
 
-mb.on('after-create-window', (event) => {
-  // mb.window.webContents.openDevTools()
-})
-
 
 // ipc channel listeners
 ipcMain.on('hide-window', (event) => {
@@ -37,6 +33,10 @@ ipcMain.on('quit', (event) => {
 ipcMain.on('handle-data', (event, data) => {
   repo.insert(data)
   runTasks()
+})
+
+ipcMain.on('debug', (event) => {
+  mb.window.webContents.openDevTools()
 })
 
 

@@ -26,6 +26,11 @@ quit.addEventListener('click', function (event) {
   ipcRenderer.send('quit')
 })
 
+var debug = document.getElementById('debug')
+debug.addEventListener('click', function (event) {
+  ipcRenderer.send('debug')
+})
+
 
 // register context meny and copy and paste support for input box
 const inputMenu = require('electron-input-menu')
