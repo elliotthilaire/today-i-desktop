@@ -12,3 +12,6 @@ textarea {
 #quit {
   float:right;
 }
+
+#status.pending { color: orange; }
+#status.up-to-date { color: green; }
