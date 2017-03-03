@@ -25,3 +25,12 @@ var quit = document.getElementById('quit')
 quit.addEventListener('click', function (event) {
   ipcRenderer.send('quit')
 })
+
+
+// register context meny and copy and paste support for input box
+const inputMenu = require('electron-input-menu')
+const context = require('electron-contextmenu-middleware')
+
+inputMenu.registerShortcuts()
+context.use(inputMenu)
+context.activate()
