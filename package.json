@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "electron src",
     "build": "electron-packager src --out dist",
-    "clean": "rm -rf dist/*"
-  }
+    "clean": "rm -rf dist/*",
+    "install": "cp -r dist/today-i-darwin-x64/today-i.app ~/Applications/",
+    "reinstall": "bash -c 'yarn run clean && yarn run build && yarn run install'"
+  },
+  "dependencies": {}
 }
