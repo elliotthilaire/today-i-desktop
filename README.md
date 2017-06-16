@@ -26,6 +26,7 @@ See `today-i-desktop/package.json` for more `yarn run ...` commands to build, in
 ## Configuration
 
 It will read a config file from `~/.config/today-i/.today-i-config.js`
+
 It will store submissions for later in `~/.config/today-i/.today-i-db.js`
 
 Override these with `TODAY_I_CONFIG` and `TODAY_I_STORAGE_FILE` environment variables.
