@@ -18,10 +18,10 @@ yarn install
 Start electron in development mode:
 ```bash
 cd today-i-desktop
-yarn run dev
+yarn start-dev
 ```
 
-See `today-i-desktop/package.json` for more `yarn run ...` commands to build, install, and reinstall.
+See `today-i-desktop/package.json` for more `yarn ...` commands to build, install, and reinstall.
 
 ## Configuration
 

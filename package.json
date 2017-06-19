@@ -4,11 +4,11 @@
     "electron-packager": "^8.5.2"
   },
   "scripts": {
-    "dev": "electron src",
-    "build": "electron-packager src --out dist",
-    "clean": "rm -rf dist/*",
-    "install": "cp -r dist/today-i-darwin-x64/today-i.app ~/Applications/",
-    "reinstall": "bash -c 'yarn run clean && yarn run build && yarn run install'"
+    "start-dev": "electron src",
+    "build-app": "electron-packager src --out dist",
+    "clean-dist": "rm -rf dist/*",
+    "install-app": "cp -r dist/today-i-darwin-x64/today-i.app ~/Applications/",
+    "reinstall-app": "bash -c 'yarn run clean-dist && yarn run build-app && yarn run install-app'"
   },
   "dependencies": {}
 }
